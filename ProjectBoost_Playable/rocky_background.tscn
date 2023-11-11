@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://n0v04ehlefua"]
+
+[ext_resource type="Material" uid="uid://djn3sljypld6e" path="res://WallMaterial.tres" id="1_wlnn7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjtjo"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ase4g"]
+sky_material = SubResource("ProceduralSkyMaterial_fjtjo")
+
+[sub_resource type="Environment" id="Environment_ukkjr"]
+background_mode = 1
+background_color = Color(0.219608, 0.129412, 0.0196078, 1)
+sky = SubResource("Sky_ase4g")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="RockyBackground" type="CSGBox3D" groups=["Hazardous"]]
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+
+[node name="Wall" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -17.0047, 0.389873, -8.3933)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall2" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(0.958899, -0.283748, 0, 0.283748, 0.958899, 0, 0, 0, 1, -12.2139, 7.55261, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall3" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(0.958899, -0.283748, 0, 0.283748, 0.958899, 0, 0, 0, 1, -12.2139, 11.3688, -9.02407)
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.0348, 9.48293, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Ceiling2" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.0348, 13.0562, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall4" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-0.958899, 0.283748, -8.74228e-08, 0.283748, 0.958899, 0, 8.38296e-08, -2.4806e-08, -1, 6.54341, 8.16489, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall7" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-0.958899, 0.283748, -8.74228e-08, 0.283748, 0.958899, 0, 8.38296e-08, -2.4806e-08, -1, 6.54341, 12.631, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall8" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-0.958899, 0.283748, -8.74228e-08, 0.283748, 0.958899, 0, 8.38296e-08, -2.4806e-08, -1, 14.1683, 12.631, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall6" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(-0.670582, 0.741836, -7.46166e-08, 0.741836, 0.670582, 4.55533e-08, 8.38296e-08, -2.4806e-08, -1, 14.6813, 7.1003, -9.02407)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="Wall5" type="CSGBox3D" parent="." groups=["Hazardous"]]
+transform = Transform3D(0.0258982, 0.999665, -2.26267e-08, 0.999665, -0.0258982, 8.44439e-08, 8.38296e-08, -2.4806e-08, -1, 16.9316, -0.254468, -8.50453)
+material_override = ExtResource("1_wlnn7")
+use_collision = true
+size = Vector3(10, 4, 4)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ukkjr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.25, 0.446394, -0.444343, 0.776719, -0.225245, 0.784255, 0.578107, 0, 0, 0)
+shadow_enabled = true

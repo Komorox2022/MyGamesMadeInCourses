@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://6iwi00q7m0po"]
+
+[ext_resource type="Script" path="res://LandingPad.gd" id="1_6nt4r"]
+[ext_resource type="PackedScene" uid="uid://cg0cms0nuwla4" path="res://player.tscn" id="2_d48lw"]
+[ext_resource type="AudioStream" uid="uid://dek0akgvt8qn2" path="res://Audio/SFX - Death Explosion.ogg" id="3_fmktb"]
+[ext_resource type="AudioStream" uid="uid://bra2fcbywl2gs" path="res://Audio/SFX - Success.ogg" id="4_seuxf"]
+[ext_resource type="AudioStream" uid="uid://cirefdppfrybw" path="res://Audio/SFX - Main engine thrust.ogg" id="5_0w2po"]
+[ext_resource type="PackedScene" uid="uid://n0v04ehlefua" path="res://rocky_background.tscn" id="6_t1pvj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llvxs"]
+albedo_color = Color(0.533788, 0.514961, 0.075509, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4r1uw"]
+albedo_color = Color(0.407843, 0.537255, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pei8b"]
+albedo_color = Color(0, 0.686275, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_db3r0"]
+albedo_color = Color(0, 0.384314, 0.705882, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="." groups=["FloorGroup"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -8.49342)
+use_collision = true
+size = Vector3(30, 4, 4)
+material = SubResource("StandardMaterial3D_llvxs")
+
+[node name="Floor2" type="CSGBox3D" parent="." groups=["FloorGroup"]]
+transform = Transform3D(1, 0, 0, 0, 0.999802, 0.0198954, 0, -0.0198954, 0.999802, 0, 3.19383, -8.49342)
+use_collision = true
+size = Vector3(17.0465, 1.44528, 4)
+material = SubResource("StandardMaterial3D_4r1uw")
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1493, 0.0818501, -8.49342)
+use_collision = true
+size = Vector3(2.5, 0.25, 2.5)
+material = SubResource("StandardMaterial3D_pei8b")
+
+[node name="LandingPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0191, 0.12155, -8.49342)
+use_collision = true
+size = Vector3(2.5, 0.25, 2.5)
+material = SubResource("StandardMaterial3D_db3r0")
+script = ExtResource("1_6nt4r")
+file_path = "res://Level/Level_3.tscn"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73386, 2.75898)
+
+[node name="Player" parent="." instance=ExtResource("2_d48lw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0821, 1.23085, -8.30291)
+thrust = 2000.0
+
+[node name="Explosion_audio2" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("3_fmktb")
+
+[node name="Success_audio2" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("4_seuxf")
+
+[node name="Rocket_audio2" type="AudioStreamPlayer3D" parent="Player"]
+stream = ExtResource("5_0w2po")
+
+[node name="RockyBackground" parent="." instance=ExtResource("6_t1pvj")]
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
