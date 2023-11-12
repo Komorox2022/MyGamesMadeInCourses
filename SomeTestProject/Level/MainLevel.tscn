@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://clgnd1r7d280y"]
+
+[ext_resource type="PackedScene" uid="uid://byngdqtuoevda" path="res://player.tscn" id="1_pqbr3"]
+[ext_resource type="Script" path="res://Level/HealingBox.gd" id="2_eeaip"]
+[ext_resource type="Script" path="res://Level/DamageBox.gd" id="2_pbgw5"]
+[ext_resource type="PackedScene" uid="uid://dqp7vaoepsp75" path="res://Hazards/AnimatableHazard.tscn" id="4_6x3at"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u84eb"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ifgij"]
+sky_material = SubResource("ProceduralSkyMaterial_u84eb")
+
+[sub_resource type="Environment" id="Environment_xsivp"]
+background_mode = 2
+sky = SubResource("Sky_ifgij")
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_he1kl"]
+albedo_color = Color(0.498039, 0.572549, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdsom"]
+albedo_color = Color(0.52549, 0.439216, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dplrk"]
+albedo_color = Color(0, 0.603922, 0.0117647, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xsivp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_pqbr3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2585, 0)
+axis_lock_linear_y = false
+max_contacts_reported = 10
+contact_monitor = true
+players_rotation_velocity = 250.0
+players_jump_velocity = 50000.0
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495287, 0)
+use_collision = true
+size = Vector3(17.803, 0.116463, 15.463)
+material = SubResource("StandardMaterial3D_he1kl")
+
+[node name="DamageBox" type="CSGBox3D" parent="." groups=["DamageBox"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18474, -0.458755, 0)
+use_collision = true
+size = Vector3(2, 0.148, 2)
+material = SubResource("StandardMaterial3D_kdsom")
+script = ExtResource("2_pbgw5")
+damage_factor = 15
+
+[node name="HealingBox" type="CSGBox3D" parent="." groups=["HealthBox"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.52903, -0.440474, 0)
+use_collision = true
+size = Vector3(2, 0.148, 2)
+material = SubResource("StandardMaterial3D_dplrk")
+script = ExtResource("2_eeaip")
+
+[node name="AnimatableHazard" parent="." instance=ExtResource("4_6x3at")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61194, 7.2439)
+destination = Vector3(0, 5, 0)

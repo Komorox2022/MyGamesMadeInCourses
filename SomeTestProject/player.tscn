@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://byngdqtuoevda"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_0k204"]
+[ext_resource type="AudioStream" uid="uid://bfxlj1rryyn5j" path="res://SFX - Death Explosion.ogg" id="2_r570e"]
+[ext_resource type="AudioStream" uid="uid://cymvbbicxcmo4" path="res://weapon_hit.mp3" id="3_3nstf"]
+[ext_resource type="AudioStream" uid="uid://d0u5gbn5tgy8y" path="res://HitHealth.mp3" id="4_1ft4f"]
+[ext_resource type="PackedScene" path="res://explosion_particles.tscn" id="5_fnikx"]
+[ext_resource type="PackedScene" path="res://success_particles.tscn" id="6_ughy1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uq1q8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p3s3o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2yxna"]
+
+[node name="Player" type="RigidBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+linear_damp = 2.0
+angular_damp = 3.0
+script = ExtResource("1_0k204")
+players_velocity = 1000.0
+players_rotation_velocity = 1000.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91743, 0)
+mesh = SubResource("CapsuleMesh_uq1q8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.46976, 0, 0, 0, 0.471504, 0, 0, 0, 0.471504, 0.708695, 0.858857, 0)
+mesh = SubResource("BoxMesh_p3s3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912186, 0)
+shape = SubResource("CapsuleShape3D_2yxna")
+
+[node name="LostAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r570e")
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3nstf")
+
+[node name="HitHealthAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1ft4f")
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("5_fnikx")]
+
+[node name="SuccessParticles" parent="." instance=ExtResource("6_ughy1")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, -4, 2.7508, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqp7vaoepsp75"]
+
+[ext_resource type="Script" path="res://Hazards/AnimatableHazard.gd" id="1_kl4aw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wnvof"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ylain"]
+size = Vector3(5, 5, 5)
+
+[node name="AnimatableHazard" type="AnimatableBody3D"]
+script = ExtResource("1_kl4aw")
+duration = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wnvof")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ylain")
